@@ -21,6 +21,9 @@ const Burger = props => {
     <div className={classes.Burger}>
       <BurgerIngredient type="bread-top" />
       {transformIngredients}
+      <p>
+        Current price: <strong>{props.price.toFixed(2)}$</strong>
+      </p>
       <BurgerIngredient type="bread-bottom" />
     </div>
   );
