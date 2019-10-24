@@ -13,3 +13,13 @@
   outline: none;
   cursor: pointer;
 }
+
+.Label {}
+
+.BuildControl .Less {}
+
+.BuildControl .Less:hover .Less:active {}
+
+.BuildControl .More {}
+
+.BuildControl .More:hover .More:active {}
