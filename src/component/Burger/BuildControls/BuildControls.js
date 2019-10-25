@@ -10,7 +10,6 @@ const controls = [
 ];
 
 const BuildControls = props => {
-  console.log(props.purchasable);
   return (
     <div className={classes.BuildControls}>
       {controls.map(control => (
@@ -19,6 +18,7 @@ const BuildControls = props => {
           label={control.label}
           add={() => props.addedIngredients(control.type)}
           remove={() => props.removedIngredients(control.type)}
+          disabled={props.disabledBtn[control.type]}
         />
       ))}
 

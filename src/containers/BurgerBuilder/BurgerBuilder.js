@@ -40,8 +40,6 @@ class BurgerBuilder extends Component {
     if (ingredients[type] !== 0) {
       ingredients[type] = ingredients[type] - 1;
       newPrice = state.basePrise - INGREDIENT_PRICES[type];
-    } else {
-      alert(`${type}  is no longer in your burger!`);
     }
     this.setState({
       ingredients: ingredients,
@@ -63,6 +61,14 @@ class BurgerBuilder extends Component {
   };
 
   render() {
+    const disabledInfo = {
+      ...this.state.ingredients
+    };
+
+    for (let key in disabledInfo) {
+      disabledInfo[key] = disabledInfo[key] <= 0;
+    }
+
     return (
       <div className={classes.Content}>
         <div className={classes.Left}>
@@ -76,6 +82,7 @@ class BurgerBuilder extends Component {
             addedIngredients={this.addIngredients}
             removedIngredients={this.removeIngredients}
             purchasable={this.state.purchasable}
+            disabledBtn={disabledInfo}
           />
         </div>
       </div>

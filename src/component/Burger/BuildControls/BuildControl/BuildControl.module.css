@@ -36,14 +36,16 @@
   color: #ff924f;
 }
 
-.BuildControl .Less:hover {
+.BuildControl .Less:hover, .Less:active {
   background: #ffa066;
   color: white;
 }
 
-.BuildControl .Less:active {
-  background: #ffa066;
-  color: white;
+.BuildControl .Less:disabled {
+  background: #d9d9d9;
+  border: 1px solid #949494;
+  color: #949494;
+  cursor: not-allowed;
 }
 
 .BuildControl .More {
