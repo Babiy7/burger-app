@@ -9,14 +9,6 @@
   overflow-x: hidden;
 }
 
-::-web-kit-scrollbar {
-  width: 50px;
-}
-
-::-web-kit-scrollbar-thumb {
-  background: red;
-}
-
 .Price {
   font-size: 1.2rem;
   margin: 0;
