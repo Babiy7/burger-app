@@ -1,0 +1,12 @@
+.Content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Left {}
+
+.Right {
+    margin-left: 50px;
+}
