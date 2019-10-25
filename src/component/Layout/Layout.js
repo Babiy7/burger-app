@@ -3,10 +3,10 @@ import classes from "./Layout.module.css";
 
 const Layout = props => {
   return (
-    <>
-      <div>Drawer, logo</div>
-      <main className={classes.content}>{props.children}</main>
-    </>
+    <div className={classes.Layout}>
+      <div className={classes.Toolbar}>Drawer, logo</div>
+      <main className={classes.Content}>{props.children}</main>
+    </div>
   );
 };
 
