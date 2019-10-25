@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+.BuildControl {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.WrappingButton {
+  widows: 70%;
+  display: flex;
+}
+
+.BuildControl button {
+  display: block;
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: .3s;
+  margin: 0 5px;
+  width: 80px;
+  outline: none;
+  cursor: pointer;
+  background: none;
+}
+
+.Label {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  font-size: 18px;
+}
+
+.BuildControl .Less {
+  border: 1px solid #ff924f;
+  color: #ff924f;
+}
+
+.BuildControl .Less:hover {
+  background: #ffa066;
+  color: white;
+}
+
+.BuildControl .Less:active {
+  background: #ffa066;
+  color: white;
+}
+
+.BuildControl .More {
+  border: 1px solid #fc9881;
+  color: #fc9881;
+}
+
+.BuildControl .More:hover {
+  background: #ffb4a3;
+  color: white;
+}
+
+.BuildControl .More:active {
+  background: #ffb4a3;
+  color: white;
+}
