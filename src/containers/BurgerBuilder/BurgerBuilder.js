@@ -13,12 +13,24 @@ const INGREDIENT_PRICES = {
 class BurgerBuilder extends Component {
   state = {
     ingredients: {
-      salad: 1,
-      meat: 1,
-      cheese: 1,
-      bacon: 1
+      salad: 0,
+      meat: 0,
+      cheese: 0,
+      bacon: 0
     },
-    basePrise: 4
+    basePrise: 1,
+    purchasable: false
+  };
+
+  purchasable = ingredients => {
+    const sum = Object.keys(this.state.ingredients)
+      .map(keyIngredient => {
+        return ingredients[keyIngredient];
+      })
+      .reduce((sum, current) => {
+        return sum + current;
+      }, 0);
+    this.setState({ purchasable: sum > 0 });
   };
 
   removeIngredients = type => {
@@ -35,6 +47,7 @@ class BurgerBuilder extends Component {
       ingredients: ingredients,
       basePrise: newPrice
     });
+    this.purchasable(ingredients);
   };
 
   addIngredients = type => {
@@ -46,10 +59,10 @@ class BurgerBuilder extends Component {
       ingredients: ingredients,
       basePrise: newPrice
     });
+    this.purchasable(ingredients);
   };
 
   render() {
-    console.log(this.state.basePrise);
     return (
       <div className={classes.Content}>
         <div className={classes.Left}>
@@ -62,6 +75,7 @@ class BurgerBuilder extends Component {
           <BuildControls
             addedIngredients={this.addIngredients}
             removedIngredients={this.removeIngredients}
+            purchasable={this.state.purchasable}
           />
         </div>
       </div>
