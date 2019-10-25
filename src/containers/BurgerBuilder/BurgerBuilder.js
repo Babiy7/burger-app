@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import classes from "./BurgerBuilder.module.css";
 import Burger from "../../component/Burger/Burger";
 import BuildControls from "../../component/Burger/BuildControls/BuildControls";
+import Modal from "../../component/UI/Modal/Modal";
+import OrderSummary from "../../component/Burger/OrderSummary/OrderSummary";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -83,8 +85,12 @@ class BurgerBuilder extends Component {
             removedIngredients={this.removeIngredients}
             purchasable={this.state.purchasable}
             disabledBtn={disabledInfo}
+            openModal={this.openHandle}
           />
         </div>
+        <Modal>
+          <OrderSummary ingredients={this.state.ingredients} />
+        </Modal>
       </div>
     );
   }
