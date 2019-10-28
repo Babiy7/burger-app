@@ -4,10 +4,10 @@ const OrderSummary = props => {
   const summaryIngredients = Object.keys(props.ingredients).map(
     ingredientsKey => {
       return (
-        <li>
-          <spam style={{ textTransform: "capitalize" }}>
+        <li key={ingredientsKey}>
+          <span style={{ textTransform: "capitalize" }}>
             {ingredientsKey}: {props.ingredients[ingredientsKey]}
-          </spam>
+          </span>
         </li>
       );
     }
