@@ -1,11 +1,11 @@
 import React from "react";
 import classes from "./Modal.module.css";
-import BackDrop from "../BackDrop/Backdrop";
+import Backdrop from "../Backdrop/Backdrop";
 
 const Modal = props => {
   return (
     <>
-      <BackDrop open={props.open} close={props.close} />
+      <Backdrop open={props.open} close={props.close} />
       <div
         className={classes.Modal}
         style={{
