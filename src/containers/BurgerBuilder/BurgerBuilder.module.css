@@ -1,11 +1,34 @@
 .Content {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.Left {}
+.Left {
+}
 
 .Right {
-    margin: 20px 0 0 50px;
+  margin-top: 20px;
+
+  box-sizing: border-box;
+}
+
+@media (max-width: 1000px) {
+  .Content {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .Content {
+    flex-direction: column-reverse;
+  }
+  .Right {
+    margin-top: 0px;
+    width: 100%;
+  }
+  .Left {
+    width: 100%;
+  }
 }
