@@ -5,12 +5,12 @@ import Backdrop from "../Backdrop/Backdrop";
 const Modal = props => {
   return (
     <>
-      <Backdrop open={props.open} close={props.close} />
+      <Backdrop show={props.show} unShow={props.unShow} />
       <div
         className={classes.Modal}
         style={{
           // transform: props.open ? "translateY(0)" : "translateY(-100vh)",
-          opacity: props.open ? "1" : "0"
+          opacity: props.show ? "1" : "0"
         }}
       >
         {props.children}

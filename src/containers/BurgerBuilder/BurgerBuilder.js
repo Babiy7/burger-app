@@ -67,16 +67,18 @@ class BurgerBuilder extends Component {
     this.setState({ purchasing: true });
   };
 
-  closeModal = () => {
+  unShowModal = () => {
     this.setState({ purchasing: false });
   };
 
   continuePurchasing = () => {
-    this.closeModal();
+    this.unShowModal();
     alert("Your burger is ready, Be prepared to pay!");
   };
 
   render() {
+    const state = this.state;
+
     const disabledInfo = {
       ...this.state.ingredients
     };
@@ -88,25 +90,23 @@ class BurgerBuilder extends Component {
     return (
       <div className={classes.Content}>
         <div className={classes.Left}>
-          <Burger
-            ingredients={this.state.ingredients}
-            price={this.state.basePrise}
-          />
+          <Burger ingredients={state.ingredients} price={state.basePrise} />
         </div>
         <div className={classes.Right}>
           <BuildControls
             addedIngredients={this.addIngredients}
             removedIngredients={this.removeIngredients}
-            purchasable={this.state.purchasable}
+            purchasable={state.purchasable}
             disabledBtn={disabledInfo}
             purchasing={this.updatePurchasingState}
           />
         </div>
-        <Modal close={this.closeModal} open={this.state.purchasing}>
+        <Modal unShow={this.unShowModal} show={state.purchasing}>
           <OrderSummary
-            cancel={this.closeModal}
+            cancel={this.unShowModal}
             continue={this.continuePurchasing}
-            ingredients={this.state.ingredients}
+            ingredients={state.ingredients}
+            price={state.basePrise.toFixed(2)}
           />
         </Modal>
       </div>
