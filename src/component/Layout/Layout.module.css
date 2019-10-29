@@ -1,18 +1,16 @@
 .Layout {
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.Toolbar {
+.Main {
   width: 100%;
-  height: 60px;
-  background: #ffd496;
-}
-
-.Content {
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 20px;
+  margin-top: 60px;
+  box-sizing: border-box;
 }
