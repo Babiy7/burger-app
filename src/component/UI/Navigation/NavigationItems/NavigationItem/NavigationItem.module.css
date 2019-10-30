@@ -19,3 +19,17 @@
     background: #ffc466;
     border-bottom: 4px solid #49aabf;
 }
+
+@media (max-width: 499px) {
+    .NavigationItem {
+        display: block;
+    }
+    .NavigationItem a {
+        color: #b08f3a;
+    }
+    .NavigationItem a:hover, .NavigationItem a:active, .NavigationItem a.active {
+        color: #49aabf;
+        background: #f5e1ae;
+        border-bottom: 4px solid transparent;
+    }
+}

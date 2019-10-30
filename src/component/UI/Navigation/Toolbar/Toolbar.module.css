@@ -13,3 +13,9 @@
   color: white;
   z-index: 90;
 }
+
+@media (max-width: 499px) {
+  .DesktopOnly {
+    display: none;
+  }
+}
