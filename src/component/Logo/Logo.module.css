@@ -1,12 +1,13 @@
 .Logo {
-    height: 60px;
+    height: 80%;
     background: #ffde82;
     padding: 10px;
     display: flex;
     align-items: center;
     box-sizing: border-box;
+    border-radius: 5px;
 }
 
 .Logo img {
-    height: 90%;
+    height: 100%;
 }
