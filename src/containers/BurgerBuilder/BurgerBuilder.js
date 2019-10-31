@@ -24,7 +24,7 @@ class BurgerBuilder extends Component {
     purchasable: false,
     purchasing: false
   };
-  
+
   purchasable = ingredients => {
     const sum = Object.keys(this.state.ingredients)
       .map(keyIngredient => {
@@ -64,6 +64,7 @@ class BurgerBuilder extends Component {
   };
 
   updatePurchasingState = () => {
+    console.log("purchasing");
     this.setState({ purchasing: true });
   };
 
