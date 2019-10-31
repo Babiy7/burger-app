@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./Layout.module.css";
-import Toolbar from "../UI/Navigation/Toolbar/Toolbar";
-import SideDrawer from "../UI/Navigation/SideDrawer/SideDrawer";
+import Toolbar from "../../component/UI/Navigation/Toolbar/Toolbar";
+import SideDrawer from "../../component/UI/Navigation/SideDrawer/SideDrawer";
 
 const Layout = props => {
   const [open, setOpen] = useState(false);
