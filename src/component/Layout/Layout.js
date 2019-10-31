@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./Layout.module.css";
 import Toolbar from "../UI/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../UI/Navigation/SideDrawer/SideDrawer";
 
 const Layout = props => {
+  const [open, setOpen] = useState(false);
+
+  function sideDrawerToggleHandler() {
+    setOpen(!open);
+  }
+
+  function sideDrawerClosedHandler() {
+    setOpen(!open);
+  }
   return (
     <div className={classes.Layout}>
-      <Toolbar />
-      <SideDrawer />
+      <Toolbar clicked={sideDrawerToggleHandler} open={open} />
+      <SideDrawer open={open} handleShow={sideDrawerClosedHandler} />
       <main className={classes.Main}>{props.children}</main>
     </div>
   );
