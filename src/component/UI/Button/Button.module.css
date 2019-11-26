@@ -29,3 +29,9 @@
     background: #ff7866;
     color: white;
 }
+
+.Disabled {
+    color: white;
+    border: #6b6b6b 1px solid;
+    background: #a1a1a1;
+}

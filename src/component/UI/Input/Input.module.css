@@ -1,0 +1,47 @@
+.Input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.Label {
+  text-align: left;
+  margin: 0px 0px 10px 15px;
+}
+
+.InputElement {
+  width: 100%;
+  border: #ccc solid 1px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  margin: 0px auto;
+  outline: none;
+  border-radius: 16px;
+}
+
+.Invalid {
+  border: #ff6161 solid 1px;
+  background: #ff9191;
+  color: #ffe6e6;
+}
+
+.Invalid:hover, .Invalid:focus {
+  border: #ff6161 solid 1px;
+  background: #ff9191;
+  color: #ffe6e6;
+}
+
+input:focus, input:hover {
+  border: #ffd761 solid 1px;
+  background: #fff7cc;
+}
+
+.Select {
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.TextArea {}

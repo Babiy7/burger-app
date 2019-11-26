@@ -25,6 +25,7 @@ const OrderSummary = props => {
       <Button type="Danger" clicked={props.cancel}>
         CANSEL
       </Button>
+
       <Button type="Success" clicked={props.continue}>
         CONTINUE
       </Button>

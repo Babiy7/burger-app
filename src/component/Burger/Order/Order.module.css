@@ -1,0 +1,25 @@
+.Order {
+    width: 450px;
+    padding: 20px;
+    margin: 20px auto;
+    border: 1px solid #eee;
+    box-shadow: 0 3px 4px #ccc;
+    box-sizing: border-box;
+}
+
+.SectionBurger {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Burger {
+    margin-top: 40px;
+}
+
+@media (max-width: 500px) {
+    .Order {
+        width: 80%;
+    }
+}
