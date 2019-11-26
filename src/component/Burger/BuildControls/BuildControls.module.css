@@ -13,7 +13,7 @@
   padding: 10px 35px;
   font-size: 14px;
   border-radius: 4px;
-  transition: .3s;
+  transition: 0.3s;
   outline: none;
   cursor: pointer;
   background: #ffb347;
@@ -21,7 +21,8 @@
   color: white;
 }
 
-.OrderButton:hover, .OrderButton:active {
+.OrderButton:hover,
+.OrderButton:active {
   background: #ffd496;
   border: 1px solid #d17d04;
   color: #d17d04;

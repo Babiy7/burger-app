@@ -1,0 +1,14 @@
+.ContactData {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    border: #eee solid 1px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 5px #ccc;
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
