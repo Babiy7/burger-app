@@ -16,7 +16,11 @@ const Layout = props => {
   return (
     <div className={classes.Layout}>
       <Toolbar clicked={sideDrawerToggleHandler} open={open} />
-      <SideDrawer open={open} handleShow={sideDrawerClosedHandler} />
+      <SideDrawer
+        clicked={sideDrawerToggleHandler}
+        open={open}
+        handleShow={sideDrawerClosedHandler}
+      />
       <main className={classes.Main}>{props.children}</main>
     </div>
   );

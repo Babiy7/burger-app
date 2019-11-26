@@ -17,8 +17,4 @@ const Modal = props => (
   </>
 );
 
-function shouldRendering(prevProps, nextProps) {
-  return prevProps.show === nextProps.show;
-}
-
-export default memo(Modal, shouldRendering);
+export default memo(Modal);

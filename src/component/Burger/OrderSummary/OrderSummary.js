@@ -2,7 +2,6 @@ import React from "react";
 import Button from "../../UI/Button/Button";
 
 const OrderSummary = props => {
-  console.log("rendering OrderSummary");
   const summaryIngredients = Object.keys(props.ingredients).map(
     ingredientsKey => {
       return (
@@ -26,6 +25,7 @@ const OrderSummary = props => {
       <Button type="Danger" clicked={props.cancel}>
         CANSEL
       </Button>
+
       <Button type="Success" clicked={props.continue}>
         CONTINUE
       </Button>

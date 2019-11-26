@@ -18,7 +18,7 @@ const SideDrawer = props => {
           <Logo />
         </div>
         <nav className={classes.MobileOnly}>
-          <NavigationItems />
+          <NavigationItems clicked={props.clicked} />
         </nav>
       </div>
     </>
