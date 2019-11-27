@@ -1,12 +1,7 @@
-import * as ActionType from "./action";
+import * as ActionType from "../actions/actionTypes";
 
 const innitialState = {
-  ingredients: {
-    salad: 0,
-    bacon: 0,
-    meat: 0,
-    cheese: 0
-  },
+  ingredients: null,
   basePrice: 1
 };
 
@@ -37,6 +32,12 @@ const ingredientsReducer = (state = innitialState, action) => {
           [action.typeIngredient]: state.ingredients[action.typeIngredient] + 1
         },
         basePrice: state.basePrice + INGREDIENT_PRICES[action.typeIngredient]
+      };
+    }
+    case ActionType.INIT_INGREDIENTS: {
+      return {
+        ...state,
+        ingredients: action.ingredients
       };
     }
     default: {
