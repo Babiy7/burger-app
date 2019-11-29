@@ -82,7 +82,7 @@ const ContactData = props => {
   //     ref.current.focus();
   //   }
   // });
-
+  console.log(props.ingredients);
   function validation(value, rules) {
     let isValid = true;
 
@@ -205,10 +205,10 @@ const ContactData = props => {
 
 const mapStateToProps = state => {
   return {
-    ingredients: state.order.ingredients,
-    price: state.order.basePrice,
-    success: state.order.success,
-    loading: state.order.loading
+    ingredients: state.ingredientsStore.ingredients,
+    price: state.ingredientsStore.basePrice,
+    success: state.orderStore.success,
+    loading: state.orderStore.loading
   };
 };
 const mapDispatchToProps = dispatch => {

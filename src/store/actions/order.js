@@ -4,7 +4,7 @@ import AxiosOrders from "../../axios-orders";
 export const orderBurgerSuccess = (id, orderData) => {
   return {
     type: ActionType.SUCCESS_ORDER,
-    payload: id,
+    id: id,
     order: orderData
   };
 };
@@ -17,7 +17,6 @@ export const orderBurgerFail = error => {
 };
 
 export const orderStart = orderData => {
-  console.log("orderStart");
   return dispatch => {
     dispatch({ type: ActionType.LOADING_ORDER, payload: true });
     AxiosOrders.post("/orders.json", orderData)
@@ -27,7 +26,6 @@ export const orderStart = orderData => {
         dispatch({ type: ActionType.LOADING_ORDER, payload: false });
       })
       .catch(error => {
-        console.log(error);
         dispatch(orderBurgerFail(error));
       });
   };

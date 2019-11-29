@@ -7,3 +7,7 @@ export const INIT_INGREDIENTS = "INIT_INGREDIENTS";
 export const SUCCESS_ORDER = "SUCCESS_ORDER";
 export const FAIL_ORDER = "FAIL_ORDER";
 export const LOADING_ORDER = "LOADING_ORDER";
+
+//ORDERS
+export const INIT_ORDERS = "INIT_ORDERS";
+export const FAIL_ORDERS = "FAIL_ORDERS";

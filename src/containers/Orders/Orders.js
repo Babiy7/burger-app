@@ -1,50 +1,56 @@
-import React, { useEffect, useState } from "react";
+import React, { Component } from "react";
 import Order from "../../component/Burger/Order/Order";
 import AxiosOrders from "../../axios-orders";
+import { connect } from "react-redux";
+import * as ActionCreator from "../../store/actions/";
+import Spinner from "../../component/UI/Spinner/Spinner";
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
-const Orders = props => {
-  const [state, setState] = useState({
-    orders: []
-  });
+class Orders extends Component {
+  componentDidMount() {
+    this.props.pullOrders();
+  }
 
-  useEffect(() => {
-    AxiosOrders.get("orders.json")
-      .then(response => {
-        let fetchedData = [];
-        if (state.orders.length === 0) {
-          for (let key in response.data) {
-            fetchedData.push({
-              ...response.data[key],
-              id: key
-            });
-          }
+  render() {
+    return (
+      <>
+        {this.props.orders ? (
+          Object.keys(this.props.orders).map(id => {
+            const order = this.props.orders[id];
+            return (
+              <Order
+                key={id}
+                name={order.name}
+                email={order.email}
+                street={order.address}
+                delivery={order.delivery}
+                date={order.date}
+                ingredients={order.burger}
+                price={order.price}
+              />
+            );
+          })
+        ) : (
+          <Spinner />
+        )}
+      </>
+    );
+  }
+}
 
-          setState({ orders: fetchedData });
-        }
-        console.log(fetchedData);
-      })
-      .catch(error => {});
-  }, [state.orders]);
-
-  return (
-    <>
-      {state.orders.map(order => {
-        console.log(order.street);
-        return (
-          <Order
-            key={order.id}
-            name={order.name}
-            email={order.email}
-            street={order.address}
-            delivery={order.delivery}
-            date={order.date}
-            ingredients={order.burger}
-            price={order.price}
-          />
-        );
-      })}
-    </>
-  );
+const mapStateToProps = state => {
+  return {
+    orders: state.ordersStore.orders
+  };
 };
 
-export default Orders;
+const mapDispatchToProps = dispatch => {
+  return {
+    pullOrders: () => dispatch(ActionCreator.initOrders())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(Orders, AxiosOrders));
