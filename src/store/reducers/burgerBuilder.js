@@ -2,7 +2,7 @@ import * as ActionType from "../actions/actionTypes";
 
 const innitialState = {
   ingredients: null,
-  basePrice: 1
+  basePrice: null
 };
 
 const INGREDIENT_PRICES = {
@@ -37,7 +37,8 @@ const ingredientsReducer = (state = innitialState, action) => {
     case ActionType.INIT_INGREDIENTS: {
       return {
         ...state,
-        ingredients: action.ingredients
+        ingredients: action.ingredients,
+        basePrice: action.basePrice
       };
     }
     default: {

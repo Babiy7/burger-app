@@ -28,11 +28,14 @@ export const removeIngredients = typeIngredient => {
 };
 export const initIngredients = () => {
   return dispatch => {
-    AxiosOrders.get("/ingredients.json")
+    AxiosOrders.get("/initBurger.json")
       .then(response => {
+        const ingredients = response.data.ingredients;
+        const basePrice = response.data.basePrice;
         dispatch({
           type: ActionType.INIT_INGREDIENTS,
-          ingredients: response.data
+          ingredients: ingredients,
+          basePrice: basePrice
         });
       })
       .catch(error => {});
