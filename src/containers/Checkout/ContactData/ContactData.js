@@ -1,13 +1,15 @@
 import React, {
   useState
-  // useRef, useEffect
+  // useRef,
 } from "react";
 import classes from "./ContactData.module.css";
 import Button from "../../../component/UI/Button/Button";
 import Spinner from "../../../component/UI/Spinner/Spinner";
 import Input from "../../../component/UI/Input/Input";
-import AxiosOrders from "../../../axios-orders";
+import * as ActionCreator from "../../../store/actions/";
 import { connect } from "react-redux";
+import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
+import Axios from "../../../axios-orders";
 
 const ContactData = props => {
   // const ref = useRef();
@@ -72,8 +74,7 @@ const ContactData = props => {
         valid: true
       }
     },
-    isValidForm: false,
-    loading: false
+    isValidForm: false
   });
 
   // useEffect(() => {
@@ -118,11 +119,12 @@ const ContactData = props => {
     });
   }
 
+  if (props.success) {
+    props.history.push("/");
+  }
+
   function sendDataOnServer(e) {
     e.preventDefault();
-    setState({
-      loading: true
-    });
 
     const orderForm = { ...state.orderForm };
     let currentdate = new Date();
@@ -150,17 +152,7 @@ const ContactData = props => {
       price: props.price,
       date: datetime
     };
-
-    setTimeout(() => {
-      AxiosOrders.post("/orders.json", order)
-        .then(response => {
-          setState({
-            loading: false
-          });
-          props.history.push("/");
-        })
-        .catch(error => {});
-    }, 2000);
+    props.orderPush(order);
   }
 
   let formElementArray = [];
@@ -199,7 +191,7 @@ const ContactData = props => {
     </form>
   );
 
-  if (state.loading) {
+  if (props.loading) {
     form = <Spinner />;
   }
 
@@ -213,9 +205,19 @@ const ContactData = props => {
 
 const mapStateToProps = state => {
   return {
-    ingredients: state.ingredients,
-    price: state.basePrice
+    ingredients: state.order.ingredients,
+    price: state.order.basePrice,
+    success: state.order.success,
+    loading: state.order.loading
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    orderPush: orderData => dispatch(ActionCreator.orderStart(orderData))
   };
 };
 
-export default connect(mapStateToProps)(ContactData);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(ContactData, Axios));

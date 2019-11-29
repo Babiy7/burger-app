@@ -7,7 +7,7 @@ import OrderSummary from "../../component/Burger/OrderSummary/OrderSummary";
 import AxiosOrders from "../../axios-orders";
 import Spinner from "../../component/UI/Spinner/Spinner";
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
-import * as burgerBuilderAction from "../../store/actions/burgerBuilder";
+import * as ActionCreator from "../../store/actions/";
 import { connect } from "react-redux";
 
 class BurgerBuilder extends Component {
@@ -18,13 +18,6 @@ class BurgerBuilder extends Component {
 
   componentDidMount() {
     this.props.initIngredients();
-    // setTimeout(() => {
-    //   AxiosOrders.get("/ingredients.json")
-    //     .then(response => {
-    //       this.setState({ ingredients: response.data });
-    //     })
-    //     .catch(error => {});
-    // }, 1000);
   }
 
   purchasable = ingredients => {
@@ -115,18 +108,18 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
   return {
-    ingredients: state.ingredients,
-    basePrice: state.basePrice
+    ingredients: state.ingredients.ingredients,
+    basePrice: state.ingredients.basePrice
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     addIngredients: typeIngredient =>
-      dispatch(burgerBuilderAction.addIngredients(typeIngredient)),
+      dispatch(ActionCreator.addIngredients(typeIngredient)),
     removeIngredients: typeIngredient =>
-      dispatch(burgerBuilderAction.removeIngredients(typeIngredient)),
-    initIngredients: () => dispatch(burgerBuilderAction.initIngredients())
+      dispatch(ActionCreator.removeIngredients(typeIngredient)),
+    initIngredients: () => dispatch(ActionCreator.initIngredients())
   };
 };
 
