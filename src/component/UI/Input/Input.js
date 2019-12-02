@@ -11,7 +11,7 @@ const Input = props => {
     inputClasses.push(classes.Invalid);
     errorMessage = (
       <p style={{ color: "#ff6161", margin: "5px 0 0 0", fontSize: "12px" }}>
-        Please enter a valid value!
+        {props.configuration.errorMessage}
       </p>
     );
   }

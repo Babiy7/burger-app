@@ -1,0 +1,26 @@
+.Auth {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    border: #eee solid 1px;
+    margin-bottom: 20px;
+    padding: 50px 0 0 0;
+    box-shadow: 0 4px 5px #ccc;
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Title {
+    color: #ffb347;
+}
+
+.Icon {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
