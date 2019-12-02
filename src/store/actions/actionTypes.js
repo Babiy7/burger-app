@@ -4,10 +4,15 @@ export const ADD_INGREDIENTS = "ADD_INGREDIENTS";
 export const INIT_INGREDIENTS = "INIT_INGREDIENTS";
 
 //ORDER
+export const LOADING_ORDER = "LOADING_ORDER";
 export const SUCCESS_ORDER = "SUCCESS_ORDER";
 export const FAIL_ORDER = "FAIL_ORDER";
-export const LOADING_ORDER = "LOADING_ORDER";
 
 //ORDERS
 export const INIT_ORDERS = "INIT_ORDERS";
 export const FAIL_ORDERS = "FAIL_ORDERS";
+
+//AUTH
+export const LOADING_AUTH = "LOADING_ORDERS";
+export const SUCCESS_AUTH = "SUCCESS_ORDERS";
+export const FAIL_AUTH = "FAIL_AUTH";

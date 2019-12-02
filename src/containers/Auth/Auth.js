@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import Input from "../../component/UI/Input/Input";
 import Button from "../../component/UI/Button/Button";
 import Lock from "../../component/Lock/Lock";
 import classes from "./Auth.module.css";
+import * as ActionCreator from "../../store/actions/";
 
 class Auth extends Component {
   constructor(props) {
@@ -78,6 +81,14 @@ class Auth extends Component {
     });
   };
 
+  loginHandle = e => {
+    e.preventDefault();
+    this.props.auth(
+      this.state.controls.email.value,
+      this.state.controls.password.value
+    );
+  };
+
   render() {
     let controls = [];
     for (let elementType in this.state.controls) {
@@ -93,7 +104,7 @@ class Auth extends Component {
           <h2 className={classes.Title}>Login</h2>
           <Lock width="80px" height="80px" />
         </div>
-        <form className={classes.Form}>
+        <form className={classes.Form} onSubmit={this.loginHandle}>
           {controls.map(element => {
             return (
               <Input
@@ -111,4 +122,10 @@ class Auth extends Component {
   }
 }
 
-export default Auth;
+const mapDispatchToProps = dispatch => {
+  return {
+    auth: (email, password) => dispatch(ActionCreator.auth(email, password))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Auth);
