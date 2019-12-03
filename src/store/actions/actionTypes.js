@@ -13,6 +13,7 @@ export const INIT_ORDERS = "INIT_ORDERS";
 export const FAIL_ORDERS = "FAIL_ORDERS";
 
 //AUTH
-export const LOADING_AUTH = "LOADING_ORDERS";
-export const SUCCESS_AUTH = "SUCCESS_ORDERS";
-export const FAIL_AUTH = "FAIL_AUTH";
+export const AUTH_LOADING = "AUTH_LOADING";
+export const AUTH_SUCCESS = "AUTH_SUCCESS";
+export const AUTH_FAIL = "AUTH_FAIL";
+export const AUTH_LOGOT = "AUTH_LOGOT";

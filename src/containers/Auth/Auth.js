@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import Input from "../../component/UI/Input/Input";
 import Button from "../../component/UI/Button/Button";
 import Lock from "../../component/Lock/Lock";
+import Spinner from "../../component/UI/Spinner/Spinner";
+
 import classes from "./Auth.module.css";
 import * as ActionCreator from "../../store/actions/";
 
@@ -91,7 +93,8 @@ class Auth extends Component {
     );
   };
 
-  switchHandle = () => {
+  switchHandle = e => {
+    e.preventDefault();
     this.setState(prevState => {
       return {
         isSignUp: !prevState.isSignUp
@@ -108,37 +111,62 @@ class Auth extends Component {
       });
     }
 
+    let content = (
+      <form className={classes.Form}>
+        {controls.map(element => {
+          return (
+            <Input
+              key={element.id}
+              changed={event => this.formHandle(event, element.id)}
+              configuration={element.controls}
+              invalid={!element.controls.valid}
+            />
+          );
+        })}
+        <Button type="Success" clicked={this.loginHandle}>
+          {this.state.isSignUp ? "Sign up" : "Sign in"}
+        </Button>
+        <button className={classes.SwitchButton} onClick={this.switchHandle}>
+          Switch to {this.state.isSignUp ? "sign in" : "sign up"}
+        </button>
+      </form>
+    );
+
+    if (this.props.loading) {
+      content = <Spinner />;
+    }
+
+    let errorMessage = null;
+
+    if (this.props.error) {
+      errorMessage = (
+        <div className={classes.ErrorContent}>
+          <p>{this.props.error.message}</p>
+        </div>
+      );
+    }
+
     return (
       <div className={classes.Auth}>
+        {errorMessage}
         <div className={classes.Icon}>
           <h2 className={classes.Title}>
             {this.state.isSignUp ? "Sign up" : "Sign in"}
           </h2>
           <Lock width="80px" height="80px" />
         </div>
-        <form className={classes.Form} onSubmit={this.loginHandle}>
-          {controls.map(element => {
-            return (
-              <Input
-                key={element.id}
-                changed={event => this.formHandle(event, element.id)}
-                configuration={element.controls}
-                invalid={!element.controls.valid}
-              />
-            );
-          })}
-          <Button type="Success">
-            {this.state.isSignUp ? "Sign up" : "Sign in"}
-          </Button>
-          <button className={classes.SwitchButton} onClick={this.switchHandle}>
-            Switch to {this.state.isSignUp ? "sign in" : "sign up"}
-          </button>
-        </form>
+        {content}
       </div>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    loading: state.authStore.loading,
+    error: state.authStore.error
+  };
+};
 const mapDispatchToProps = dispatch => {
   return {
     auth: (email, password, isSignUp) =>
@@ -146,4 +174,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

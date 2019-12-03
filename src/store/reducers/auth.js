@@ -3,35 +3,41 @@ import { updatedState } from "../utility";
 
 const innitialState = {
   token: null,
-  error: false,
+  error: null,
   loading: false,
-  id: null
+  userId: null
 };
 
 const loading = state => {
-  return updatedState(state, { loading: true });
+  return updatedState(state, { loading: true, error: null });
 };
 const success = (state, action) => {
   return updatedState(state, {
     loading: false,
     token: action.authData.idToken,
-    id: action.authData.localId
+    userId: action.authData.localId,
+    error: null
   });
 };
-const fail = state => {
-  return updatedState(state, { loading: false, error: true });
+const fail = (state, action) => {
+  return updatedState(state, { loading: false, error: action.error });
+};
+const logout = (state, action) => {
+  return updatedState(state, { token: null, userId: null });
 };
 
 const authReducer = (state = innitialState, action) => {
   switch (action.type) {
-    case ActionType.LOADING_AUTH:
+    case ActionType.AUTH_LOADING:
       return loading(state);
 
-    case ActionType.SUCCESS_AUTH:
+    case ActionType.AUTH_SUCCESS:
       return success(state, action);
 
-    case ActionType.FAIL_AUTH:
-      return fail(state);
+    case ActionType.AUTH_FAIL:
+      return fail(state, action);
+    case ActionType.AUTH_LOGOT:
+      return logout(state, action);
 
     default: {
       return state;
