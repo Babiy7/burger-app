@@ -42,7 +42,8 @@ class Auth extends Component {
           value: "",
           valid: false
         }
-      }
+      },
+      isSignUp: true
     };
   }
 
@@ -85,8 +86,17 @@ class Auth extends Component {
     e.preventDefault();
     this.props.auth(
       this.state.controls.email.value,
-      this.state.controls.password.value
+      this.state.controls.password.value,
+      this.state.isSignUp
     );
+  };
+
+  switchHandle = () => {
+    this.setState(prevState => {
+      return {
+        isSignUp: !prevState.isSignUp
+      };
+    });
   };
 
   render() {
@@ -101,7 +111,9 @@ class Auth extends Component {
     return (
       <div className={classes.Auth}>
         <div className={classes.Icon}>
-          <h2 className={classes.Title}>Login</h2>
+          <h2 className={classes.Title}>
+            {this.state.isSignUp ? "Sign up" : "Sign in"}
+          </h2>
           <Lock width="80px" height="80px" />
         </div>
         <form className={classes.Form} onSubmit={this.loginHandle}>
@@ -115,7 +127,12 @@ class Auth extends Component {
               />
             );
           })}
-          <Button type="Success"> Login </Button>
+          <Button type="Success">
+            {this.state.isSignUp ? "Sign up" : "Sign in"}
+          </Button>
+          <button className={classes.SwitchButton} onClick={this.switchHandle}>
+            Switch to {this.state.isSignUp ? "sign in" : "sign up"}
+          </button>
         </form>
       </div>
     );
@@ -124,7 +141,8 @@ class Auth extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    auth: (email, password) => dispatch(ActionCreator.auth(email, password))
+    auth: (email, password, isSignUp) =>
+      dispatch(ActionCreator.auth(email, password, isSignUp))
   };
 };
 

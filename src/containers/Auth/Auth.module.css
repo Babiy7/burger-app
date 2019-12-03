@@ -24,3 +24,15 @@
     flex-direction: column-reverse;
     align-items: center;
 }
+
+.SwitchButton {
+    border: none;
+    background: none;
+    margin: 20px 0;
+    color: #ffb347;
+}
+
+.SwitchButton:hover {
+    border-bottom: black 1px solid;
+    color: black;
+}
