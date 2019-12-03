@@ -15,10 +15,10 @@ export const failOrdersBurger = () => {
   };
 };
 
-export const initOrders = () => {
+export const initOrders = token => {
   return dispatch => {
     dispatch({ type: ActionType.LOADING_ORDER, payload: true });
-    AxiosOrders.get("/orders.json")
+    AxiosOrders.get("/orders.json?auth=" + token)
       .then(response => {
         dispatch(initOrdersBurger(response.data));
         dispatch({ type: ActionType.LOADING_ORDER, payload: false });

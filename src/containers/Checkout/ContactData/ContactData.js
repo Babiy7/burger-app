@@ -152,7 +152,7 @@ const ContactData = props => {
       price: props.price,
       date: datetime
     };
-    props.orderPush(order);
+    props.orderPush(order, props.token);
   }
 
   let formElementArray = [];
@@ -208,12 +208,14 @@ const mapStateToProps = state => {
     ingredients: state.ingredientsStore.ingredients,
     price: state.ingredientsStore.basePrice,
     success: state.orderStore.success,
-    loading: state.orderStore.loading
+    loading: state.orderStore.loading,
+    token: state.authStore.token
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    orderPush: orderData => dispatch(ActionCreator.orderStart(orderData))
+    orderPush: (orderData, token) =>
+      dispatch(ActionCreator.orderStart(orderData, token))
   };
 };
 

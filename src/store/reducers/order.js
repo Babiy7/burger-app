@@ -14,7 +14,8 @@ const ingredientsReducer = (state = innitialState, action) => {
     case ActionType.INIT_ORDERS: {
       return {
         ...state,
-        orders: state.orders.concat(action.orders)
+        orders: state.orders.concat(action.orders),
+        loading: false
       };
     }
     case ActionType.SUCCESS_ORDER: {
@@ -22,20 +23,22 @@ const ingredientsReducer = (state = innitialState, action) => {
       return {
         ...state,
         success: true,
-        order: { id: action.id, order: action.order }
+        order: { id: action.id, order: action.order },
+        loading: false
       };
     }
     case ActionType.FAIL_ORDER: {
       return {
         ...state,
         error: true,
-        errorMessage: action.error
+        errorMessage: action.error,
+        loading: false
       };
     }
     case ActionType.LOADING_ORDER: {
       return {
         ...state,
-        loading: action.payload
+        loading: true
       };
     }
     default: {
