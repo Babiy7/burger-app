@@ -164,6 +164,8 @@ const ContactData = props => {
     });
   }
 
+  console.log(props.loading);
+
   let form = (
     <form className={classes.Form}>
       {formElementArray.map(element => {

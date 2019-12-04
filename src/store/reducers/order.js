@@ -19,7 +19,6 @@ const ingredientsReducer = (state = innitialState, action) => {
       };
     }
     case ActionType.SUCCESS_ORDER: {
-      console.log(action);
       return {
         ...state,
         success: true,
