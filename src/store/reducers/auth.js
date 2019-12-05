@@ -14,8 +14,8 @@ const loading = state => {
 const success = (state, action) => {
   return updatedState(state, {
     loading: false,
-    token: action.authData.idToken,
-    userId: action.authData.localId,
+    token: action.token,
+    userId: action.userId,
     error: null
   });
 };

@@ -6,12 +6,15 @@ const authLoading = () => {
     type: ActionType.AUTH_LOADING
   };
 };
+
 const authSuccess = authData => {
   return {
     type: ActionType.AUTH_SUCCESS,
-    authData: authData
+    token: authData.idToken,
+    userId: authData.localId
   };
 };
+
 const authFail = error => {
   return {
     type: ActionType.AUTH_FAIL,
@@ -19,18 +22,33 @@ const authFail = error => {
   };
 };
 
-const logout = () => {
+const checkAuthTimeout = expirationTime => {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(logout());
+    }, expirationTime * 1000);
+  };
+};
+
+export const logout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
+  localStorage.removeItem("expires");
   return {
     type: ActionType.AUTH_LOGOT
   };
 };
 
-const checkAuthTimeout = expirationTime => {
-  console.log(expirationTime);
+export const checkUserIsSignIn = () => {
   return dispatch => {
-    setTimeout(() => {
-      dispatch(logout());
-    }, expirationTime * 1000);
+    const token = localStorage.getItem("token");
+    if (token) {
+      const userId = localStorage.getItem("userId");
+      const expiresIn = localStorage.getItem("expires");
+      dispatch(
+        authSuccess({ idToken: token, localId: userId, expiresIn: expiresIn })
+      );
+    }
   };
 };
 
@@ -53,7 +71,9 @@ export const auth = (email, password, isSignUp) => {
     axios
       .post(url, authData)
       .then(response => {
-        console.log(response);
+        localStorage.setItem("token", response.data.idToken);
+        localStorage.setItem("userId", response.data.localId);
+        localStorage.setItem("expires", response.data.expiresIn);
         dispatch(authSuccess(response.data));
         dispatch(checkAuthTimeout(response.data.expiresIn));
       })

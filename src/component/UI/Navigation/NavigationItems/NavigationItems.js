@@ -11,8 +11,8 @@ const NavigationItems = props => {
       <NavigationItem clicked={props.clicked} link="/orders">
         Orders
       </NavigationItem>
-      <NavigationItem clicked={props.clicked} link="/auth">
-        Auth
+      <NavigationItem clicked={props.clicked} link="/logout">
+        Logout
       </NavigationItem>
     </ul>
   );

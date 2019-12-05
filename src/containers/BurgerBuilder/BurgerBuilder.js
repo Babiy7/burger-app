@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import classes from "./BurgerBuilder.module.css";
+
 import Burger from "../../component/Burger/Burger";
 import BuildControls from "../../component/Burger/BuildControls/BuildControls";
 import Modal from "../../component/UI/Modal/Modal";
 import OrderSummary from "../../component/Burger/OrderSummary/OrderSummary";
 import AxiosOrders from "../../axios-orders";
 import Spinner from "../../component/UI/Spinner/Spinner";
+
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
+
+import { Redirect } from "react-router-dom";
 import * as ActionCreator from "../../store/actions/";
 import { connect } from "react-redux";
 
@@ -17,7 +21,9 @@ class BurgerBuilder extends Component {
   };
 
   componentDidMount() {
-    this.props.initIngredients();
+    if (this.props.isAuth) {
+      this.props.initIngredients();
+    }
   }
 
   purchasable = ingredients => {
@@ -46,6 +52,7 @@ class BurgerBuilder extends Component {
   };
 
   render() {
+    console.log(new Date(new Date()));
     const state = this.state;
 
     const disabledInfo = {
@@ -97,6 +104,7 @@ class BurgerBuilder extends Component {
     }
     return (
       <div className={classes.Content}>
+        {!this.props.isAuth ? <Redirect to="/auth" /> : null}
         {burger}
         <Modal unShow={this.unShowModal} show={state.purchasing}>
           {orderSummary}
@@ -109,7 +117,8 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => {
   return {
     ingredients: state.ingredientsStore.ingredients,
-    basePrice: state.ingredientsStore.basePrice
+    basePrice: state.ingredientsStore.basePrice,
+    isAuth: state.authStore.token !== null
   };
 };
 

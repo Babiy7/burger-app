@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import classes from "./Auth.module.css";
 
 import Input from "../../component/UI/Input/Input";
 import Button from "../../component/UI/Button/Button";
 import Lock from "../../component/Lock/Lock";
 import Spinner from "../../component/UI/Spinner/Spinner";
 
-import classes from "./Auth.module.css";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 import * as ActionCreator from "../../store/actions/";
 
 class Auth extends Component {
@@ -148,6 +149,7 @@ class Auth extends Component {
 
     return (
       <div className={classes.Auth}>
+        {this.props.isAuth ? <Redirect to="/" /> : null}
         {errorMessage}
         <div className={classes.Icon}>
           <h2 className={classes.Title}>
@@ -164,7 +166,8 @@ class Auth extends Component {
 const mapStateToProps = state => {
   return {
     loading: state.authStore.loading,
-    error: state.authStore.error
+    error: state.authStore.error,
+    isAuth: state.authStore.token !== null
   };
 };
 const mapDispatchToProps = dispatch => {
