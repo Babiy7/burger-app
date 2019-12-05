@@ -17,3 +17,4 @@ export const AUTH_LOADING = "AUTH_LOADING";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_LOGOT = "AUTH_LOGOT";
+export const AUTH_REFRESH = "AUTH_REFRESH";

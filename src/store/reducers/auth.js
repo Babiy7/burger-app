@@ -11,6 +11,16 @@ const innitialState = {
 const loading = state => {
   return updatedState(state, { loading: true, error: null });
 };
+
+const refresh = (state, action) => {
+  return updatedState(state, {
+    loading: false,
+    token: action.token,
+    userId: action.userId,
+    error: null
+  });
+};
+
 const success = (state, action) => {
   return updatedState(state, {
     loading: false,
@@ -19,9 +29,11 @@ const success = (state, action) => {
     error: null
   });
 };
+
 const fail = (state, action) => {
   return updatedState(state, { loading: false, error: action.error });
 };
+
 const logout = (state, action) => {
   return updatedState(state, { token: null, userId: null });
 };
@@ -34,8 +46,12 @@ const authReducer = (state = innitialState, action) => {
     case ActionType.AUTH_SUCCESS:
       return success(state, action);
 
+    case ActionType.AUTH_REFRESH:
+      return refresh(state, action);
+
     case ActionType.AUTH_FAIL:
       return fail(state, action);
+
     case ActionType.AUTH_LOGOT:
       return logout(state, action);
 

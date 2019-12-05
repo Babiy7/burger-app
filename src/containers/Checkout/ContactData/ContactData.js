@@ -82,7 +82,7 @@ const ContactData = props => {
   //     ref.current.focus();
   //   }
   // });
-  console.log(props.ingredients);
+
   function validation(value, rules) {
     let isValid = true;
 
@@ -150,7 +150,8 @@ const ContactData = props => {
       burger: props.ingredients,
       ...form,
       price: props.price,
-      date: datetime
+      date: datetime,
+      userId: props.userId
     };
     props.orderPush(order, props.token);
   }
@@ -163,8 +164,6 @@ const ContactData = props => {
       configuration: state.orderForm[key]
     });
   }
-
-  console.log(props.loading);
 
   let form = (
     <form className={classes.Form}>
@@ -211,7 +210,8 @@ const mapStateToProps = state => {
     price: state.ingredientsStore.basePrice,
     success: state.orderStore.success,
     loading: state.orderStore.loading,
-    token: state.authStore.token
+    token: state.authStore.token,
+    userId: state.authStore.userId
   };
 };
 const mapDispatchToProps = dispatch => {

@@ -8,7 +8,7 @@ import Logout from "./containers/Logout/Logout";
 import Auth from "./containers/Auth/Auth";
 
 import Layout from "../src/hoc/Layout/Layout";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as ActionCreator from "./store/actions/";
 
@@ -18,21 +18,39 @@ class App extends Component {
   }
 
   render() {
+    let routes = (
+      <Switch>
+        <Route exact path="/" component={BurgerBuilder} />
+        <Route path="/auth" component={Auth} />
+        <Redirect to="/" />
+      </Switch>
+    );
+
+    if (this.props.isAuth) {
+      routes = (
+        <Switch>
+          <Route exact path="/" component={BurgerBuilder} />
+          <Route path="/checkout" component={Checkout} />
+          <Route path="/orders" component={Orders} />
+          <Route path="/logout" component={Logout} />
+          <Redirect to="/" />
+        </Switch>
+      );
+    }
+
     return (
       <div className={classes.App}>
-        <Layout>
-          <Switch>
-            <Route exact path="/" component={BurgerBuilder} />
-            <Route path="/checkout" component={Checkout} />
-            <Route path="/orders" component={Orders} />
-            <Route path="/logout" component={Logout} />
-            <Route path="/auth" component={Auth} />
-          </Switch>
-        </Layout>
+        <Layout>{routes}</Layout>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    isAuth: state.authStore.token !== null
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -40,4 +58,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

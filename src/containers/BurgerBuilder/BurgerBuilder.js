@@ -52,7 +52,6 @@ class BurgerBuilder extends Component {
   };
 
   render() {
-    console.log(new Date(new Date()));
     const state = this.state;
 
     const disabledInfo = {

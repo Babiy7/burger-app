@@ -15,10 +15,13 @@ export const failOrdersBurger = () => {
   };
 };
 
-export const initOrders = token => {
+export const initOrders = (token, userId) => {
   return dispatch => {
+    console.log(userId);
     dispatch({ type: ActionType.LOADING_ORDER, payload: true });
-    AxiosOrders.get("/orders.json?auth=" + token)
+    const queryParams =
+      "?auth=" + token + '&orderBy="userId"&equalTo="' + userId + '"';
+    AxiosOrders.get("/orders.json" + queryParams)
       .then(response => {
         dispatch(initOrdersBurger(response.data));
         dispatch({ type: ActionType.LOADING_ORDER, payload: false });
