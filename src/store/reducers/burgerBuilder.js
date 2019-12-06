@@ -1,5 +1,5 @@
 import * as ActionType from "../actions/actionTypes";
-import { updatedState } from "../../shared/utility";
+import { updatedObject } from "../../shared/utility";
 
 const innitialState = {
   ingredients: null,
@@ -13,47 +13,43 @@ const INGREDIENT_PRICES = {
   bacon: 0.8
 };
 
-const remove = (state, action) => {
-  return updatedState(state, {
+const remove = (state, action) =>
+  updatedObject(state, {
     ingredients: {
       ...state.ingredients,
       [action.typeIngredient]: state.ingredients[action.typeIngredient] - 1
     },
     basePrice: state.basePrice - INGREDIENT_PRICES[action.typeIngredient]
   });
-};
 
-const add = (state, action) => {
-  return updatedState(state, {
+const add = (state, action) =>
+  updatedObject(state, {
     ingredients: {
       ...state.ingredients,
       [action.typeIngredient]: state.ingredients[action.typeIngredient] + 1
     },
-    basePrice: state.basePrice - INGREDIENT_PRICES[action.typeIngredient]
+    basePrice: state.basePrice + INGREDIENT_PRICES[action.typeIngredient]
   });
-};
 
-const init = (state, action) => {
-  return updatedState(state, {
+const init = (state, action) =>
+  updatedObject(state, {
     ingredients: action.ingredients,
     basePrice: action.basePrice
   });
-};
 
 const ingredientsReducer = (state = innitialState, action) => {
   switch (action.type) {
-    case ActionType.REMOVE_INGREDIENTS: {
+    case ActionType.REMOVE_INGREDIENTS:
       return remove(state, action);
-    }
-    case ActionType.ADD_INGREDIENTS: {
+
+    case ActionType.ADD_INGREDIENTS:
       return add(state, action);
-    }
-    case ActionType.INIT_INGREDIENTS: {
+
+    case ActionType.INIT_INGREDIENTS:
       return init(state, action);
-    }
-    default: {
+
+    default:
       return state;
-    }
   }
 };
 

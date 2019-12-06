@@ -3,13 +3,16 @@ import React, {
   // useRef,
 } from "react";
 import classes from "./ContactData.module.css";
+
 import Button from "../../../component/UI/Button/Button";
 import Spinner from "../../../component/UI/Spinner/Spinner";
 import Input from "../../../component/UI/Input/Input";
+
 import * as ActionCreator from "../../../store/actions/";
 import { connect } from "react-redux";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import Axios from "../../../axios-orders";
+import { updatedObject, validation } from "../../../shared/utility";
 
 const ContactData = props => {
   // const ref = useRef();
@@ -83,30 +86,19 @@ const ContactData = props => {
   //   }
   // });
 
-  function validation(value, rules) {
-    let isValid = true;
+  const formSubmitHandle = (event, inputType) => {
+    const updatedType = updatedObject(state.orderForm[inputType], {
+      value: event.target.value,
+      valid: validation(
+        event.target.value,
+        state.orderForm[inputType].validation
+      ),
+      touched: true
+    });
 
-    if (!rules) {
-      return true;
-    }
-    if (rules.required) {
-      isValid = value.trim() !== "" && isValid;
-    }
-    if (rules.type === "email") {
-      isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && isValid;
-    }
-    return isValid;
-  }
-
-  function formSubmitHandle(event, inputType) {
-    const updatedForm = {
-      ...state.orderForm
-    };
-    const updatedType = { ...updatedForm[inputType] };
-    updatedType.value = event.target.value;
-    updatedType.valid = validation(updatedType.value, updatedType.validation);
-    updatedType.touched = true;
-    updatedForm[inputType] = updatedType;
+    const updatedForm = updatedObject(state.orderForm, {
+      [inputType]: updatedType
+    });
 
     let isValidForm = true;
 
@@ -117,13 +109,13 @@ const ContactData = props => {
       orderForm: updatedForm,
       isValidForm: isValidForm
     });
-  }
+  };
 
   if (props.success) {
     props.history.push("/");
   }
 
-  function sendDataOnServer(e) {
+  const sendDataOnServer = e => {
     e.preventDefault();
 
     const orderForm = { ...state.orderForm };
@@ -154,7 +146,7 @@ const ContactData = props => {
       userId: props.userId
     };
     props.orderPush(order, props.token);
-  }
+  };
 
   let formElementArray = [];
 

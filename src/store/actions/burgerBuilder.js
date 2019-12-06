@@ -7,15 +7,10 @@ const add = typeIngredient => {
     typeIngredient: typeIngredient
   };
 };
+
 const remove = typeIngredient => {
   return {
     type: ActionType.REMOVE_INGREDIENTS,
-    typeIngredient: typeIngredient
-  };
-};
-const init = typeIngredient => {
-  return {
-    type: ActionType.INIT_INGREDIENTS,
     typeIngredient: typeIngredient
   };
 };
@@ -23,9 +18,11 @@ const init = typeIngredient => {
 export const addIngredients = typeIngredient => {
   return add(typeIngredient);
 };
+
 export const removeIngredients = typeIngredient => {
   return remove(typeIngredient);
 };
+
 export const initIngredients = () => {
   return dispatch => {
     AxiosOrders.get("/initBurger.json")
