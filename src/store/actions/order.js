@@ -16,10 +16,10 @@ export const orderBurgerFail = error => {
   };
 };
 
-export const orderStart = orderData => {
+export const orderStart = (orderData, token) => {
   return dispatch => {
     dispatch({ type: ActionType.LOADING_ORDER, payload: true });
-    AxiosOrders.post("/orders.json", orderData)
+    AxiosOrders.post("/orders.json?auth=" + token, orderData)
       .then(response => {
         console.log(response.data);
         dispatch(orderBurgerSuccess(response.data, orderData));
