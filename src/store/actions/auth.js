@@ -56,7 +56,8 @@ export const checkUserIsSignIn = () => {
       const expiresDate = new Date(localStorage.getItem("expires")).getTime();
       dispatch(authRefresh({ idToken: token, localId: userId }));
       if (expiresDate > new Date().getTime()) {
-        dispatch(checkAuthTimeout(expiresDate));
+        const expiresDateInMiliseconds = expiresDate * 1000;
+        dispatch(checkAuthTimeout(expiresDateInMiliseconds));
       } else {
         dispatch(logout());
       }
