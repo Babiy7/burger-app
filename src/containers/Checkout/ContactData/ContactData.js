@@ -86,20 +86,23 @@ const ContactData = props => {
   //   }
   // });
 
+  console.log(state.orderForm);
+
   function validation(value, rules) {
     let isValid = true;
 
     if (!rules) {
       return true;
     }
+
     if (rules.required) {
-      console.log("trim");
-      console.log(value);
       isValid = value.trim() !== "" && isValid;
     }
+
     if (rules.type === "email") {
       isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && isValid;
     }
+
     return isValid;
   }
 
@@ -107,7 +110,7 @@ const ContactData = props => {
     const updatedType = updatedObject(state.orderForm[inputType], {
       value: event.target.value,
       valid: validation(
-        state.orderForm[inputType].value,
+        event.target.value,
         state.orderForm[inputType].validation
       ),
       touched: true

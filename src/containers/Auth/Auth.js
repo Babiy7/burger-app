@@ -9,6 +9,7 @@ import Spinner from "../../component/UI/Spinner/Spinner";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as ActionCreator from "../../store/actions/";
+import { updatedObject } from "../../shared/utility";
 
 class Auth extends Component {
   constructor(props) {
@@ -70,18 +71,16 @@ class Auth extends Component {
 
   formHandle = (event, inputType) => {
     const value = event.target.value;
-    const updateControls = {
-      ...this.state.controls,
+    const updatedControls = updatedObject(this.state.controls, {
       [inputType]: {
         ...this.state.controls[inputType],
         touched: true,
         value: value,
         valid: this.validation(value, this.state.controls[inputType].validation)
       }
-    };
-
+    });
     this.setState({
-      controls: updateControls
+      controls: updatedControls
     });
   };
 
