@@ -1,3 +1,1 @@
-export const updatedState = (state, newValues) => {
-  return { ...state, ...newValues };
-};
+export const updatedObject = (state, newValues) => ({ ...state, ...newValues });

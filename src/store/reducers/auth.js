@@ -1,5 +1,5 @@
 import * as ActionType from "../actions/actionTypes";
-import { updatedState } from "../../shared/utility";
+import { updatedObject } from "../../shared/utility";
 
 const innitialState = {
   token: null,
@@ -8,35 +8,28 @@ const innitialState = {
   userId: null
 };
 
-const loading = state => {
-  return updatedState(state, { loading: true, error: null });
-};
+const loading = state => updatedObject(state, { loading: true, error: null });
 
-const refresh = (state, action) => {
-  return updatedState(state, {
+const refresh = (state, action) =>
+  updatedObject(state, {
     loading: false,
     token: action.token,
     userId: action.userId,
     error: null
   });
-};
 
-const success = (state, action) => {
-  return updatedState(state, {
+const success = (state, action) =>
+  updatedObject(state, {
     loading: false,
     token: action.token,
     userId: action.userId,
     error: null
   });
-};
 
-const fail = (state, action) => {
-  return updatedState(state, { loading: false, error: action.error });
-};
+const fail = (state, action) =>
+  updatedObject(state, { loading: false, error: action.error });
 
-const logout = (state, action) => {
-  return updatedState(state, { token: null, userId: null });
-};
+const logout = state => updatedObject(state, { token: null, userId: null });
 
 const authReducer = (state = innitialState, action) => {
   switch (action.type) {
@@ -55,9 +48,8 @@ const authReducer = (state = innitialState, action) => {
     case ActionType.AUTH_LOGOT:
       return logout(state, action);
 
-    default: {
+    default:
       return state;
-    }
   }
 };
 

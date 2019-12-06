@@ -1,5 +1,5 @@
 import * as ActionType from "../actions/actionTypes";
-import { updatedState } from "../../shared/utility";
+import { updatedObject } from "../../shared/utility";
 
 const innitialState = {
   success: false,
@@ -10,14 +10,14 @@ const innitialState = {
 };
 
 const init = (state, action) =>
-  updatedState(state, {
+  updatedObject(state, {
     orders: state.orders.concat(action.orders),
     loading: false,
     error: null
   });
 
 const success = (state, action) =>
-  updatedState(state, {
+  updatedObject(state, {
     success: true,
     order: { id: action.id, order: action.order },
     loading: false,
@@ -25,31 +25,30 @@ const success = (state, action) =>
   });
 
 const fail = (state, action) =>
-  updatedState(state, {
+  updatedObject(state, {
     error: action.error,
     errorMessage: action.error,
     loading: false
   });
 
-const loading = state => updatedState(state, { loading: true });
+const loading = state => updatedObject(state, { loading: true });
 
 const ingredientsReducer = (state = innitialState, action) => {
   switch (action.type) {
-    case ActionType.INIT_ORDERS: {
+    case ActionType.INIT_ORDERS:
       return init(state, action);
-    }
-    case ActionType.SUCCESS_ORDER: {
+
+    case ActionType.SUCCESS_ORDER:
       return success(state, action);
-    }
-    case ActionType.FAIL_ORDER: {
+
+    case ActionType.FAIL_ORDER:
       return fail(state, action);
-    }
-    case ActionType.LOADING_ORDER: {
+
+    case ActionType.LOADING_ORDER:
       return loading(state);
-    }
-    default: {
+
+    default:
       return state;
-    }
   }
 };
 

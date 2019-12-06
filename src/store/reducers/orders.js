@@ -1,5 +1,5 @@
 import * as ActionType from "../actions/actionTypes";
-import { updatedState } from "../../shared/utility";
+import { updatedObject } from "../../shared/utility";
 
 const innitialState = {
   error: null,
@@ -8,25 +8,25 @@ const innitialState = {
 };
 
 const init = (state, action) =>
-  updatedState(state, { orders: action.orders, error: false });
+  updatedObject(state, { orders: action.orders, error: false });
 
-const loading = state => updatedState(state, { loading: true });
+const loading = state => updatedObject(state, { loading: true });
 
-const fail = (state, action) => updatedState(state, { error: action.error });
+const fail = (state, action) => updatedObject(state, { error: action.error });
 
 const ordersReducer = (state = innitialState, action) => {
   switch (action.type) {
     case ActionType.INIT_ORDERS:
       return init(state, action);
-    case ActionType.LOADING_ORDER: {
+
+    case ActionType.LOADING_ORDER:
       return loading(state);
-    }
-    case ActionType.FAIL_ORDERS: {
+
+    case ActionType.FAIL_ORDERS:
       return fail(state, action);
-    }
-    default: {
+
+    default:
       return state;
-    }
   }
 };
 

@@ -14,7 +14,6 @@ class Checkout extends Component {
   };
 
   render() {
-    console.log(this.props);
     return this.props.ingredients ? (
       <>
         <CheckoutSummary

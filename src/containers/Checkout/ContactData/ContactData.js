@@ -3,13 +3,16 @@ import React, {
   // useRef,
 } from "react";
 import classes from "./ContactData.module.css";
+
 import Button from "../../../component/UI/Button/Button";
 import Spinner from "../../../component/UI/Spinner/Spinner";
 import Input from "../../../component/UI/Input/Input";
+
 import * as ActionCreator from "../../../store/actions/";
 import { connect } from "react-redux";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import Axios from "../../../axios-orders";
+import { updatedObject } from "../../../shared/utility";
 
 const ContactData = props => {
   // const ref = useRef();
@@ -90,6 +93,8 @@ const ContactData = props => {
       return true;
     }
     if (rules.required) {
+      console.log("trim");
+      console.log(value);
       isValid = value.trim() !== "" && isValid;
     }
     if (rules.type === "email") {
@@ -99,14 +104,18 @@ const ContactData = props => {
   }
 
   function formSubmitHandle(event, inputType) {
-    const updatedForm = {
-      ...state.orderForm
-    };
-    const updatedType = { ...updatedForm[inputType] };
-    updatedType.value = event.target.value;
-    updatedType.valid = validation(updatedType.value, updatedType.validation);
-    updatedType.touched = true;
-    updatedForm[inputType] = updatedType;
+    const updatedType = updatedObject(state.orderForm[inputType], {
+      value: event.target.value,
+      valid: validation(
+        state.orderForm[inputType].value,
+        state.orderForm[inputType].validation
+      ),
+      touched: true
+    });
+
+    const updatedForm = updatedObject(state.orderForm, {
+      [inputType]: updatedType
+    });
 
     let isValidForm = true;
 
