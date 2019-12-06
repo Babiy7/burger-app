@@ -9,7 +9,7 @@ import Spinner from "../../component/UI/Spinner/Spinner";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as ActionCreator from "../../store/actions/";
-import { updatedObject } from "../../shared/utility";
+import { updatedObject, validation } from "../../shared/utility";
 
 class Auth extends Component {
   constructor(props) {
@@ -51,24 +51,6 @@ class Auth extends Component {
     };
   }
 
-  validation(value, rules) {
-    let isValid = true;
-
-    if (!rules) {
-      return true;
-    }
-    if (rules.required) {
-      isValid = value.trim() !== "" && isValid;
-    }
-    if (rules.type === "email") {
-      isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && isValid;
-    }
-    if (rules.type === "password") {
-      isValid = value.length >= 6 && isValid;
-    }
-    return isValid;
-  }
-
   formHandle = (event, inputType) => {
     const value = event.target.value;
     const updatedControls = updatedObject(this.state.controls, {
@@ -76,7 +58,7 @@ class Auth extends Component {
         ...this.state.controls[inputType],
         touched: true,
         value: value,
-        valid: this.validation(value, this.state.controls[inputType].validation)
+        valid: validation(value, this.state.controls[inputType].validation)
       }
     });
     this.setState({

@@ -12,7 +12,7 @@ import * as ActionCreator from "../../../store/actions/";
 import { connect } from "react-redux";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import Axios from "../../../axios-orders";
-import { updatedObject } from "../../../shared/utility";
+import { updatedObject, validation } from "../../../shared/utility";
 
 const ContactData = props => {
   // const ref = useRef();
@@ -86,27 +86,7 @@ const ContactData = props => {
   //   }
   // });
 
-  console.log(state.orderForm);
-
-  function validation(value, rules) {
-    let isValid = true;
-
-    if (!rules) {
-      return true;
-    }
-
-    if (rules.required) {
-      isValid = value.trim() !== "" && isValid;
-    }
-
-    if (rules.type === "email") {
-      isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && isValid;
-    }
-
-    return isValid;
-  }
-
-  function formSubmitHandle(event, inputType) {
+  const formSubmitHandle = (event, inputType) => {
     const updatedType = updatedObject(state.orderForm[inputType], {
       value: event.target.value,
       valid: validation(
@@ -129,13 +109,13 @@ const ContactData = props => {
       orderForm: updatedForm,
       isValidForm: isValidForm
     });
-  }
+  };
 
   if (props.success) {
     props.history.push("/");
   }
 
-  function sendDataOnServer(e) {
+  const sendDataOnServer = e => {
     e.preventDefault();
 
     const orderForm = { ...state.orderForm };
@@ -166,7 +146,7 @@ const ContactData = props => {
       userId: props.userId
     };
     props.orderPush(order, props.token);
-  }
+  };
 
   let formElementArray = [];
 
