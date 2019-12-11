@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import classes from "./App.module.css";
+import withLazy from "./hoc/withLazy/withLazy";
 
 import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
-import Checkout from "./containers/Checkout/Checkout";
-import Orders from "./containers/Orders/Orders";
 import Logout from "./containers/Logout/Logout";
-import Auth from "./containers/Auth/Auth";
 
 import Layout from "../src/hoc/Layout/Layout";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as ActionCreator from "./store/actions/";
+
+const Checkout = withLazy(() => import("./containers/Checkout/Checkout"));
+const Orders = withLazy(() => import("./containers/Orders/Orders"));
+const Auth = withLazy(() => import("./containers/Auth/Auth"));
 
 class App extends Component {
   componentDidMount() {
