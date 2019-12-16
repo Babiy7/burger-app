@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import * as ActionCreator from "../../store/actions/";
 import { updatedObject, validation } from "../../shared/utility";
 
-class Auth extends Component {
+export class Auth extends Component {
   constructor(props) {
     super(props);
     this.state = {
