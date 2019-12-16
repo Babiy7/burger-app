@@ -17,7 +17,6 @@ export const failOrdersBurger = () => {
 
 export const initOrders = (token, userId) => {
   return dispatch => {
-    console.log(userId);
     dispatch({ type: ActionType.LOADING_ORDER, payload: true });
     const queryParams =
       "?auth=" + token + '&orderBy="userId"&equalTo="' + userId + '"';
