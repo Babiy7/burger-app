@@ -45,7 +45,8 @@ const authReducer = (state = innitialState, action) => {
     case ActionType.AUTH_FAIL:
       return fail(state, action);
 
-    case ActionType.AUTH_LOGOT:
+    case ActionType.AUTH_LOGOUT:
+      console.log("reducer logout");
       return logout(state, action);
 
     default:

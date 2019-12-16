@@ -13,8 +13,11 @@ export const INIT_ORDERS = "INIT_ORDERS";
 export const FAIL_ORDERS = "FAIL_ORDERS";
 
 //AUTH
+export const AUTH_USER = "AUTH_USER";
 export const AUTH_LOADING = "AUTH_LOADING";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAIL = "AUTH_FAIL";
-export const AUTH_LOGOT = "AUTH_LOGOT";
+export const AUTH_EXPERATION_TIME = "AUTH_EXPERATION_TIME";
+export const AUTH_INITIATE_LOGOT = "AUTH_INITIATE_LOGOT";
+export const AUTH_LOGOUT = "AUTH_LOGOUT";
 export const AUTH_REFRESH = "AUTH_REFRESH";
