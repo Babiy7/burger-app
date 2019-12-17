@@ -34,7 +34,6 @@ export function* authUserSaga(action) {
   }
   try {
     const response = yield axios.post(url, authData);
-
     const expirationTime = response.data.expiresIn * 1000;
 
     yield localStorage.setItem("token", response.data.idToken);
@@ -43,10 +42,30 @@ export function* authUserSaga(action) {
       "expires",
       new Date(new Date().getTime() + expirationTime)
     );
-
     yield put(ActionCreator.authSuccess(response.data));
     yield put(ActionCreator.checkAuthTimeout(response.data.expiresIn));
   } catch (error) {
     yield put(ActionCreator.authFail(error.response.data.error));
+  }
+}
+
+export function* checkUserIsSignInSaga(action) {
+  const token = yield localStorage.getItem("token");
+
+  if (token) {
+    yield put(ActionCreator.authLoading());
+    const userId = yield localStorage.getItem("userId");
+    const expiresDate = yield new Date(
+      localStorage.getItem("expires")
+    ).getTime();
+    yield put(ActionCreator.authRefresh({ idToken: token, localId: userId }));
+    if (expiresDate > new Date().getTime()) {
+      const expiresDateInMiliseconds = expiresDate * 1000;
+      yield put(ActionCreator.checkAuthTimeout(expiresDateInMiliseconds));
+    } else {
+      yield put(ActionCreator.logout());
+    }
+  } else {
+    yield put(ActionCreator.logout());
   }
 }

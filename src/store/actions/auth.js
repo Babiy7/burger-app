@@ -1,5 +1,4 @@
 import * as ActionType from "./actionTypes";
-import axios from "axios";
 
 export const authLoading = () => {
   return {
@@ -15,7 +14,7 @@ export const authSuccess = authData => {
   };
 };
 
-const authRefresh = authData => {
+export const authRefresh = authData => {
   return {
     type: ActionType.AUTH_REFRESH,
     token: authData.idToken,
@@ -27,6 +26,15 @@ export const authFail = error => {
   return {
     type: ActionType.AUTH_FAIL,
     error: error
+  };
+};
+
+export const auth = (email, password, isSignUp) => {
+  return {
+    type: ActionType.AUTH_USER,
+    email: email,
+    password: password,
+    isSignUp: isSignUp
   };
 };
 
@@ -50,30 +58,7 @@ export const logout = () => {
 };
 
 export const checkUserIsSignIn = () => {
-  return dispatch => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      dispatch(authLoading());
-      const userId = localStorage.getItem("userId");
-      const expiresDate = new Date(localStorage.getItem("expires")).getTime();
-      dispatch(authRefresh({ idToken: token, localId: userId }));
-      if (expiresDate > new Date().getTime()) {
-        const expiresDateInMiliseconds = expiresDate * 1000;
-        dispatch(checkAuthTimeout(expiresDateInMiliseconds));
-      } else {
-        dispatch(logout());
-      }
-    } else {
-      dispatch(logout());
-    }
-  };
-};
-
-export const auth = (email, password, isSignUp) => {
   return {
-    type: ActionType.AUTH_USER,
-    email: email,
-    password: password,
-    isSignUp: isSignUp
+    type: ActionType.AUTH_USER_ISLOGIN
   };
 };
