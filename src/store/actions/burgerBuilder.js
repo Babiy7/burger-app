@@ -1,17 +1,25 @@
-import * as ActionType from "./actionTypes";
+import * as ActionTypes from "./actionTypes";
 import AxiosOrders from "../../axios-orders";
 
 const add = typeIngredient => {
   return {
-    type: ActionType.ADD_INGREDIENTS,
+    type: ActionTypes.ADD_INGREDIENTS,
     typeIngredient: typeIngredient
   };
 };
 
 const remove = typeIngredient => {
   return {
-    type: ActionType.REMOVE_INGREDIENTS,
+    type: ActionTypes.REMOVE_INGREDIENTS,
     typeIngredient: typeIngredient
+  };
+};
+
+export const init = (ingredients, basePrice) => {
+  return {
+    type: ActionTypes.INIT_INGREDIENTS,
+    ingredients: ingredients,
+    basePrice: basePrice
   };
 };
 
@@ -24,18 +32,7 @@ export const removeIngredients = typeIngredient => {
 };
 
 export const initIngredients = () => {
-  return dispatch => {
-    AxiosOrders.get("/initBurger.json")
-      .then(response => {
-        const ingredients = response.data.ingredients;
-        const basePrice = response.data.basePrice;
-        dispatch({
-          type: ActionType.INIT_INGREDIENTS,
-          ingredients: ingredients,
-          basePrice: basePrice
-        });
-      })
-      .catch(error => {});
-    return {};
+  return {
+    type: ActionTypes.SET_INGREDIENTS_SAGA
   };
 };

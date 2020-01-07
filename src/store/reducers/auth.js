@@ -40,12 +40,13 @@ const authReducer = (state = innitialState, action) => {
       return success(state, action);
 
     case ActionType.AUTH_REFRESH:
+      console.log("refresh");
       return refresh(state, action);
 
     case ActionType.AUTH_FAIL:
       return fail(state, action);
 
-    case ActionType.AUTH_LOGOT:
+    case ActionType.AUTH_LOGOUT:
       return logout(state, action);
 
     default:
